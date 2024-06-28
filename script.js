@@ -54,7 +54,6 @@ function checkCollision() {
         characterRect.top <= obstacleRect.bottom
     ) {
         let obstacleContent = obstacle.innerHTML;
-        console.log(`Collision detected: ${obstacleContent}`);
         handleCollision(obstacleContent);
     }
 }
