@@ -5,6 +5,7 @@ let currentEquation = "1";
 let targetScore = Math.floor(Math.random() * 100) + 1;
 let steps = 0;
 let maxSteps = 100;
+let jumping = false;
 
 document.addEventListener('keydown', function(event) {
     if (event.code === 'Space') {
@@ -13,10 +14,12 @@ document.addEventListener('keydown', function(event) {
 });
 
 function jump() {
-    if (!character.classList.contains('jump')) {
+    if (!jumping) {
+        jumping = true;
         character.classList.add('jump');
         setTimeout(function() {
             character.classList.remove('jump');
+            jumping = false;
         }, 300);
     }
 }
@@ -48,10 +51,21 @@ function checkCollision() {
         obstacleRect.left <= characterRect.right &&
         obstacleRect.bottom >= characterRect.top &&
         obstacleRect.top <= characterRect.bottom) {
+        
         if (!isNaN(obstacle.innerHTML)) {
-            currentEquation += obstacle.innerHTML;
+            if (isNaN(currentEquation.slice(-1))) {
+                currentEquation += obstacle.innerHTML;
+            } else {
+                gameOver();
+                return;
+            }
         } else {
-            currentEquation += ' ' + obstacle.innerHTML + ' ';
+            if (!isNaN(currentEquation.slice(-1))) {
+                currentEquation += ' ' + obstacle.innerHTML + ' ';
+            } else {
+                gameOver();
+                return;
+            }
         }
         evaluateEquation();
         steps++;
