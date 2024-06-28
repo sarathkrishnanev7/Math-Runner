@@ -55,30 +55,33 @@ function checkCollision() {
     ) {
         let obstacleContent = obstacle.innerHTML;
         console.log(`Collision detected: ${obstacleContent}`);
-
-        if (!isNaN(obstacleContent)) { // If obstacle is a number
-            if (isNaN(currentEquation.slice(-1))) { // If last in equation is a symbol
-                currentEquation += obstacleContent;
-                evaluateEquation();
-            } else { // If last in equation is a number
-                gameOver();
-                return;
-            }
-        } else { // If obstacle is a symbol
-            if (!isNaN(currentEquation.slice(-1))) { // If last in equation is a number
-                currentEquation += ' ' + obstacleContent + ' ';
-            } else { // If last in equation is a symbol
-                gameOver();
-                return;
-            }
-        }
-
-        steps++;
-        if (steps >= maxSteps) {
-            gameOver();
-        }
-        generateObstacle();
+        handleCollision(obstacleContent);
     }
+}
+
+function handleCollision(obstacleContent) {
+    if (!isNaN(obstacleContent)) { // If obstacle is a number
+        if (isNaN(currentEquation.slice(-1))) { // If last in equation is a symbol
+            currentEquation += obstacleContent;
+            evaluateEquation();
+        } else { // If last in equation is a number
+            gameOver();
+            return;
+        }
+    } else { // If obstacle is a symbol
+        if (!isNaN(currentEquation.slice(-1))) { // If last in equation is a number
+            currentEquation += ' ' + obstacleContent + ' ';
+        } else { // If last in equation is a symbol
+            gameOver();
+            return;
+        }
+    }
+
+    steps++;
+    if (steps >= maxSteps) {
+        gameOver();
+    }
+    generateObstacle();
 }
 
 function evaluateEquation() {
