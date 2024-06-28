@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+#gameContainer {
+    position: relative;
+    width: 800px;
+    height: 200px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+#numberCharacter {
+    position: absolute;
+    bottom: 20px;
+    left: 50px;
+    font-size: 2rem;
+}
+
+#obstacle {
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+    font-size: 2rem;
+}
+
+#score {
+    margin-top: 20px;
+    font-size: 1.5rem;
+}
