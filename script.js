@@ -13,12 +13,12 @@ document.addEventListener('keydown', function(event) {
 });
 
 function jump() {
-    if (character.classList != 'animate') {
-        character.classList.add('animate');
+    if (!character.classList.contains('jump')) {
+        character.classList.add('jump');
+        setTimeout(function() {
+            character.classList.remove('jump');
+        }, 300);
     }
-    setTimeout(function() {
-        character.classList.remove('animate');
-    }, 300);
 }
 
 function generateObstacle() {
