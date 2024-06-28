@@ -52,22 +52,25 @@ function checkCollision() {
         obstacleRect.bottom >= characterRect.top &&
         obstacleRect.top <= characterRect.bottom) {
         
-        if (!isNaN(obstacle.innerHTML)) {
-            if (isNaN(currentEquation.slice(-1))) {
-                currentEquation += obstacle.innerHTML;
-            } else {
+        let obstacleContent = obstacle.innerHTML;
+
+        if (!isNaN(obstacleContent)) { // If obstacle is a number
+            if (isNaN(currentEquation.slice(-1))) { // If last in equation is a symbol
+                currentEquation += obstacleContent;
+                evaluateEquation();
+            } else { // If last in equation is a number
                 gameOver();
                 return;
             }
-        } else {
-            if (!isNaN(currentEquation.slice(-1))) {
-                currentEquation += ' ' + obstacle.innerHTML + ' ';
-            } else {
+        } else { // If obstacle is a symbol
+            if (!isNaN(currentEquation.slice(-1))) { // If last in equation is a number
+                currentEquation += ' ' + obstacleContent + ' ';
+            } else { // If last in equation is a symbol
                 gameOver();
                 return;
             }
         }
-        evaluateEquation();
+
         steps++;
         if (steps >= maxSteps) {
             gameOver();
@@ -82,6 +85,7 @@ function evaluateEquation() {
         if (!isNaN(result)) {
             character.innerHTML = result;
             scoreDisplay.innerHTML = `Score: ${result}`;
+            currentEquation = result.toString();
         } else {
             gameOver();
         }
