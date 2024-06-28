@@ -31,7 +31,7 @@ function generateObstacle() {
     } else {
         obstacle.innerHTML = getRandomDigit();
     }
-    obstacle.style.right = '0px';
+    obstacle.style.right = '800px'; // Start the obstacle from the right edge
 }
 
 function getRandomMathSymbol() {
@@ -47,11 +47,12 @@ function checkCollision() {
     let characterRect = character.getBoundingClientRect();
     let obstacleRect = obstacle.getBoundingClientRect();
 
-    if (obstacleRect.right >= characterRect.left &&
-        obstacleRect.left <= characterRect.right &&
-        obstacleRect.bottom >= characterRect.top &&
-        obstacleRect.top <= characterRect.bottom) {
-
+    if (
+        characterRect.right > obstacleRect.left &&
+        characterRect.left < obstacleRect.right &&
+        characterRect.bottom > obstacleRect.top &&
+        characterRect.top < obstacleRect.bottom
+    ) {
         let obstacleContent = obstacle.innerHTML;
 
         if (!isNaN(obstacleContent)) { // If obstacle is a number
@@ -102,11 +103,11 @@ function gameOver() {
 generateObstacle();
 setInterval(function() {
     let obstaclePosition = parseInt(obstacle.style.right);
-    if (obstaclePosition >= 800) {
-        obstacle.style.right = '0px';
+    if (obstaclePosition <= 0) {
+        obstacle.style.right = '800px';
         generateObstacle();
     } else {
-        obstacle.style.right = obstaclePosition + 5 + 'px';
-        checkCollision();
+        obstacle.style.right = obstaclePosition - 5 + 'px';
     }
-}, 100);
+    checkCollision();
+}, 50);
