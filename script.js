@@ -51,7 +51,7 @@ function checkCollision() {
         obstacleRect.left <= characterRect.right &&
         obstacleRect.bottom >= characterRect.top &&
         obstacleRect.top <= characterRect.bottom) {
-        
+
         let obstacleContent = obstacle.innerHTML;
 
         if (!isNaN(obstacleContent)) { // If obstacle is a number
