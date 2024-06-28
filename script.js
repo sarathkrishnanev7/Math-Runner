@@ -54,6 +54,7 @@ function checkCollision() {
         characterRect.top <= obstacleRect.bottom
     ) {
         let obstacleContent = obstacle.innerHTML;
+        console.log(`Collision detected: ${obstacleContent}`);
 
         if (!isNaN(obstacleContent)) { // If obstacle is a number
             if (isNaN(currentEquation.slice(-1))) { // If last in equation is a symbol
