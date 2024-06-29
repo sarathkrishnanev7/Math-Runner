@@ -32,6 +32,7 @@ function generateObstacle() {
         obstacle.innerHTML = getRandomDigit();
     }
     obstacle.style.left = '800px'; // Start the obstacle from the right edge
+    obstacle.style.bottom = '20px'; // Ensure obstacle is at the correct height
 }
 
 function getRandomMathSymbol() {
@@ -47,6 +48,9 @@ function checkCollision() {
     let characterRect = character.getBoundingClientRect();
     let obstacleRect = obstacle.getBoundingClientRect();
 
+    console.log('Character Rect:', characterRect);
+    console.log('Obstacle Rect:', obstacleRect);
+
     if (
         characterRect.right >= obstacleRect.left &&
         characterRect.left <= obstacleRect.right &&
@@ -59,6 +63,8 @@ function checkCollision() {
 }
 
 function handleCollision(obstacleContent) {
+    console.log(`Collision detected with: ${obstacleContent}`);
+
     if (!isNaN(obstacleContent)) { // If obstacle is a number
         if (isNaN(currentEquation.slice(-1))) { // If last in equation is a symbol
             currentEquation += obstacleContent;
