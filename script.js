@@ -32,7 +32,6 @@ function generateObstacle() {
         obstacle.innerHTML = getRandomDigit();
     }
     obstacle.style.left = '800px'; // Start the obstacle from the right edge
-    obstacle.style.bottom = '20px'; // Ensure obstacle is at the correct height
 }
 
 function getRandomMathSymbol() {
@@ -58,6 +57,7 @@ function checkCollision() {
         characterRect.top <= obstacleRect.bottom
     ) {
         let obstacleContent = obstacle.innerHTML;
+        console.log(`Collision detected with: ${obstacleContent}`);
         handleCollision(obstacleContent);
     }
 }
